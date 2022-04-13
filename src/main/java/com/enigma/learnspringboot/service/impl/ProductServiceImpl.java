@@ -47,7 +47,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     // get product by page / limit
-
     @Override
     public Page<Product> getProductByPage(Pageable pageable) {
         return productRepository.findAll(pageable);
