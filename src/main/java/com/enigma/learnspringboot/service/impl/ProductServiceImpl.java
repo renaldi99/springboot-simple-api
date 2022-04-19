@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Integer productId) {
+    public Product getProductById(String productId) {
         // exception if id doesn't exist
         if (productRepository.findById(productId).isPresent()) {
             return productRepository.findById(productId).get();
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Integer productId) {
+    public void deleteProductById(String productId) {
         productRepository.deleteById(productId);
     }
 

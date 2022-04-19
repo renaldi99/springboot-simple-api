@@ -25,9 +25,9 @@ public class ProductController {
 //        return productService.getAllProduct();
 //    }
 
-    @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Integer id) {
-        return productService.getProductById(id);
+    @GetMapping("/{productId}")
+    public Product getProductById(@PathVariable String productId) {
+        return productService.getProductById(productId);
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @DeleteMapping
-    public void deleteProductById(@RequestParam Integer productId) {
+    public void deleteProductById(@RequestParam String productId) {
         productService.deleteProductById(productId);
     }
 
