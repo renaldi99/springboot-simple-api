@@ -14,6 +14,7 @@ public class PageResponseWrapper<T> {
     public PageResponseWrapper(Page<T> page) {
         this.content = page.getContent();
         this.count = page.getTotalElements();
+        this.totalPages = page.getTotalPages();
         this.page = page.getNumber();
         this.size = page.getSize();
     }
