@@ -3,6 +3,7 @@ package com.enigma.learnspringboot.controller;
 import com.enigma.learnspringboot.constant.ApiUrlConstant;
 import com.enigma.learnspringboot.entity.Product;
 import com.enigma.learnspringboot.service.ProductService;
+import com.enigma.learnspringboot.utils.PageResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,13 +47,25 @@ public class ProductController {
     }
 
     // get product by page
+//    @GetMapping
+//    public Page<Product> getProductByPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
+//                                          @RequestParam(name = "size", defaultValue = "5") Integer sizePage,
+//                                          @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
+//                                          @RequestParam(name = "direct", defaultValue = "asc") String direct) {
+//        Sort sort = Sort.by(Sort.Direction.fromString(direct), sortBy);
+//        Pageable pageable = PageRequest.of(page, sizePage, sort);
+//        return productService.getProductByPage(pageable);
+//    }
+
+    // refactor pageable
     @GetMapping
-    public Page<Product> getProductByPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
-                                          @RequestParam(name = "size", defaultValue = "5") Integer sizePage,
-                                          @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
-                                          @RequestParam(name = "direct", defaultValue = "asc") String direct) {
+    public PageResponseWrapper<Product> getProductByPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                @RequestParam(name = "size", defaultValue = "5") Integer sizePage,
+                                                @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
+                                                @RequestParam(name = "direct", defaultValue = "asc") String direct) {
         Sort sort = Sort.by(Sort.Direction.fromString(direct), sortBy);
         Pageable pageable = PageRequest.of(page, sizePage, sort);
-        return productService.getProductByPage(pageable);
+        Page<Product> productPage =productService.getProductByPage(pageable);
+        return new PageResponseWrapper<>(productPage);
     }
 }
