@@ -42,7 +42,7 @@ public class CustomerController {
 //        return customerService.saveCustomer(customer);
 //    }
 
-    @PostMapping
+    //    @PostMapping
     public ResponseEntity<Response<Customer>> saveCustomer(@RequestBody Customer customer) {
         Response<Customer> response = new Response<>();
         String message = String.format(ResponseMessage.DATA_INSERTED, "customer");
@@ -71,7 +71,7 @@ public class CustomerController {
 //        return customerService.getCustomerByPage(pageable);
 //    }
 
-    @GetMapping
+    //    @GetMapping
     public Page<Customer> searchCustomerByPage(@RequestBody CustomerSearchDTO customerSearchDTO,
                                                @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                @RequestParam(name = "size", defaultValue = "5") Integer sizePage,
@@ -82,8 +82,13 @@ public class CustomerController {
         return customerService.getCustomerByPage(pageable, customerSearchDTO);
     }
 
-//    @GetMapping
-    public List<Customer> getCustomerByName(@RequestParam String firstName, @RequestParam String lastName) {
-        return customerService.getCustomerByName(firstName, lastName);
+    @GetMapping
+    public List<Customer> getCustomerByStatus(@RequestParam String status) {
+        return customerService.getCustomerByStatus(status);
+    }
+
+    @PostMapping
+    public void updateCustomerStatus(@RequestParam String status, @RequestParam String customerId) {
+        customerService.updateCustomerStatus(status, customerId);
     }
 }

@@ -59,4 +59,14 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getCustomerByName(String firstName, String lastName) {
         return customerRepository.findCustomerByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(firstName, lastName);
     }
+
+    @Override
+    public List<Customer> getCustomerByStatus(String status) {
+        return customerRepository.getCustomerByStatus(status);
+    }
+
+    @Override
+    public void updateCustomerStatus(String status, String customerId) {
+        customerRepository.updateCustomerStatus(status, customerId);
+    }
 }
